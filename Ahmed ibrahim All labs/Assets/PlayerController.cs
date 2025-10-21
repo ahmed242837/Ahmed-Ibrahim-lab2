@@ -13,15 +13,18 @@ public class PlayerController : MonoBehaviour
     public float groundCheckRadius;  // radius around ground check
     public LayerMask whatIsGround;   // defines what is considered ground
     private bool grounded;           // checks if character is standing on solid ground
-
+private Animator anim;
     void Start()
     {
-        // Initialization (if needed)
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
-        // Jump input
+       anim.SetFloat("height", GetComponent<Rigidbody2D>().velocity.y);
+       anim.SetBool("ground", grounded);
+       anim.SetFloat("speed",Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x));
+
         if (Input.GetKeyDown(Spacebar) && grounded)
         {
             Jump(); // call jump function
